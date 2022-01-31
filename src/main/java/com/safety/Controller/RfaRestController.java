@@ -19,6 +19,7 @@ import com.safety.Model.Rfa;
 import com.safety.Service.RfaService;
 
 @RestController
+@RequestMapping("/rfa")
 public class RfaRestController {
 
 	@Autowired
@@ -32,21 +33,21 @@ public class RfaRestController {
 		return new ResponseEntity<Rfa>(r,HttpStatus.OK);
 	}  
 	
-	@PutMapping("/rfa/{rfaId}")
+	@PutMapping("/{rfaId}")
 	public ResponseEntity<Rfa> updateRfa(@PathVariable int rfaId,@RequestBody Rfa rfa){
 		
 		Rfa r = service.updateRfa(rfaId,rfa);
  		return new ResponseEntity<Rfa>(r,HttpStatus.OK);
 	}
 	
-	@GetMapping("/rfa")
+	@GetMapping
 	public ResponseEntity<List<Rfa>> fetchRfa(){
 		
 		List<Rfa> r = service.findallRfa();
 		return ResponseEntity.ok().body(r);
 	}
 	
-	@GetMapping("/rfa/{rfaId}")
+	@GetMapping("/{rfaId}")
 	public ResponseEntity<List<Rfa>> getRfaById(@PathVariable int rfaId){
 		Optional<Rfa> r = service.findByRfaId(rfaId);
 		if(r.isPresent()) {
